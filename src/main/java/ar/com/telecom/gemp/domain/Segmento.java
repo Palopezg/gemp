@@ -1,5 +1,6 @@
 package ar.com.telecom.gemp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -22,8 +23,9 @@ public class Segmento implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "valor")
-    private String valor;
+    @ManyToOne
+    @JsonIgnoreProperties(value = "segmentos", allowSetters = true)
+    private TipoObra tipoObra;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -47,17 +49,17 @@ public class Segmento implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getValor() {
-        return valor;
+    public TipoObra getTipoObra() {
+        return tipoObra;
     }
 
-    public Segmento valor(String valor) {
-        this.valor = valor;
+    public Segmento tipoObra(TipoObra tipoObra) {
+        this.tipoObra = tipoObra;
         return this;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setTipoObra(TipoObra tipoObra) {
+        this.tipoObra = tipoObra;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -83,7 +85,6 @@ public class Segmento implements Serializable {
         return "Segmento{" +
             "id=" + getId() +
             ", descripcion='" + getDescripcion() + "'" +
-            ", valor='" + getValor() + "'" +
             "}";
     }
 }

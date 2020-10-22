@@ -1,9 +1,12 @@
 package ar.com.telecom.gemp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A TipoObra.
@@ -22,8 +25,12 @@ public class TipoObra implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "valor")
-    private String valor;
+    @OneToMany(mappedBy = "tipoObra")
+    private Set<Segmento> segmentos = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "tipoObras", allowSetters = true)
+    private Obra obra;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -47,17 +54,42 @@ public class TipoObra implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getValor() {
-        return valor;
+    public Set<Segmento> getSegmentos() {
+        return segmentos;
     }
 
-    public TipoObra valor(String valor) {
-        this.valor = valor;
+    public TipoObra segmentos(Set<Segmento> segmentos) {
+        this.segmentos = segmentos;
         return this;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public TipoObra addSegmento(Segmento segmento) {
+        this.segmentos.add(segmento);
+        segmento.setTipoObra(this);
+        return this;
+    }
+
+    public TipoObra removeSegmento(Segmento segmento) {
+        this.segmentos.remove(segmento);
+        segmento.setTipoObra(null);
+        return this;
+    }
+
+    public void setSegmentos(Set<Segmento> segmentos) {
+        this.segmentos = segmentos;
+    }
+
+    public Obra getObra() {
+        return obra;
+    }
+
+    public TipoObra obra(Obra obra) {
+        this.obra = obra;
+        return this;
+    }
+
+    public void setObra(Obra obra) {
+        this.obra = obra;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -83,7 +115,6 @@ public class TipoObra implements Serializable {
         return "TipoObra{" +
             "id=" + getId() +
             ", descripcion='" + getDescripcion() + "'" +
-            ", valor='" + getValor() + "'" +
             "}";
     }
 }

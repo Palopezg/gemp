@@ -4,18 +4,22 @@
     {
       "fieldName": "descripcion",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "valor",
-      "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "tipoObra",
+      "otherEntityRelationshipName": "segmento",
+      "relationshipName": "tipoObra",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20200819173509",
   "entityTableName": "segmento",
   "dto": "no",
   "pagination": "no",
-  "service": "serviceImpl",
+  "service": "no",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,
   "readOnly": false,

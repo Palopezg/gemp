@@ -8,7 +8,7 @@ export default class TipoObraUpdatePage {
   saveButton: ElementFinder = element(by.id('save-entity'));
   cancelButton: ElementFinder = element(by.id('cancel-save'));
   descripcionInput: ElementFinder = element(by.css('input#tipo-obra-descripcion'));
-  valorInput: ElementFinder = element(by.css('input#tipo-obra-valor'));
+  obraSelect: ElementFinder = element(by.css('select#tipo-obra-obra'));
 
   getPageTitle() {
     return this.pageTitle;
@@ -22,12 +22,20 @@ export default class TipoObraUpdatePage {
     return this.descripcionInput.getAttribute('value');
   }
 
-  async setValorInput(valor) {
-    await this.valorInput.sendKeys(valor);
+  async obraSelectLastOption() {
+    await this.obraSelect.all(by.tagName('option')).last().click();
   }
 
-  async getValorInput() {
-    return this.valorInput.getAttribute('value');
+  async obraSelectOption(option) {
+    await this.obraSelect.sendKeys(option);
+  }
+
+  getObraSelect() {
+    return this.obraSelect;
+  }
+
+  async getObraSelectedOption() {
+    return this.obraSelect.element(by.css('option:checked')).getText();
   }
 
   async save() {
@@ -46,9 +54,7 @@ export default class TipoObraUpdatePage {
     await waitUntilDisplayed(this.saveButton);
     await this.setDescripcionInput('descripcion');
     expect(await this.getDescripcionInput()).to.match(/descripcion/);
-    await waitUntilDisplayed(this.saveButton);
-    await this.setValorInput('valor');
-    expect(await this.getValorInput()).to.match(/valor/);
+    await this.obraSelectLastOption();
     await this.save();
     await waitUntilHidden(this.saveButton);
     expect(await isVisible(this.saveButton)).to.be.false;

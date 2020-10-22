@@ -29,10 +29,8 @@ export const TipoObraDetail = (props: ITipoObraDetailProps) => {
             <span id="descripcion">Descripcion</span>
           </dt>
           <dd>{tipoObraEntity.descripcion}</dd>
-          <dt>
-            <span id="valor">Valor</span>
-          </dt>
-          <dd>{tipoObraEntity.valor}</dd>
+          <dt>Obra</dt>
+          <dd>{tipoObraEntity.obra ? tipoObraEntity.obra.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/tipo-obra" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

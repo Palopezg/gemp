@@ -8,7 +8,7 @@ export default class SegmentoUpdatePage {
   saveButton: ElementFinder = element(by.id('save-entity'));
   cancelButton: ElementFinder = element(by.id('cancel-save'));
   descripcionInput: ElementFinder = element(by.css('input#segmento-descripcion'));
-  valorInput: ElementFinder = element(by.css('input#segmento-valor'));
+  tipoObraSelect: ElementFinder = element(by.css('select#segmento-tipoObra'));
 
   getPageTitle() {
     return this.pageTitle;
@@ -22,12 +22,20 @@ export default class SegmentoUpdatePage {
     return this.descripcionInput.getAttribute('value');
   }
 
-  async setValorInput(valor) {
-    await this.valorInput.sendKeys(valor);
+  async tipoObraSelectLastOption() {
+    await this.tipoObraSelect.all(by.tagName('option')).last().click();
   }
 
-  async getValorInput() {
-    return this.valorInput.getAttribute('value');
+  async tipoObraSelectOption(option) {
+    await this.tipoObraSelect.sendKeys(option);
+  }
+
+  getTipoObraSelect() {
+    return this.tipoObraSelect;
+  }
+
+  async getTipoObraSelectedOption() {
+    return this.tipoObraSelect.element(by.css('option:checked')).getText();
   }
 
   async save() {
@@ -46,9 +54,7 @@ export default class SegmentoUpdatePage {
     await waitUntilDisplayed(this.saveButton);
     await this.setDescripcionInput('descripcion');
     expect(await this.getDescripcionInput()).to.match(/descripcion/);
-    await waitUntilDisplayed(this.saveButton);
-    await this.setValorInput('valor');
-    expect(await this.getValorInput()).to.match(/valor/);
+    await this.tipoObraSelectLastOption();
     await this.save();
     await waitUntilHidden(this.saveButton);
     expect(await isVisible(this.saveButton)).to.be.false;
