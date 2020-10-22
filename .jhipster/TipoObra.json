@@ -4,18 +4,28 @@
     {
       "fieldName": "descripcion",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "valor",
-      "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "segmento",
+      "otherEntityRelationshipName": "tipoObra",
+      "relationshipName": "segmento"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "tipoObra",
+      "relationshipName": "obra",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20200819173309",
   "entityTableName": "tipo_obra",
   "dto": "no",
   "pagination": "no",
-  "service": "serviceImpl",
+  "service": "no",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,
   "readOnly": false,

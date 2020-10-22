@@ -34,7 +34,7 @@ export const TipoObra = (props: ITipoObraProps) => {
               <tr>
                 <th>ID</th>
                 <th>Descripcion</th>
-                <th>Valor</th>
+                <th>Obra</th>
                 <th />
               </tr>
             </thead>
@@ -47,7 +47,7 @@ export const TipoObra = (props: ITipoObraProps) => {
                     </Button>
                   </td>
                   <td>{tipoObra.descripcion}</td>
-                  <td>{tipoObra.valor}</td>
+                  <td>{tipoObra.obra ? <Link to={`obra/${tipoObra.obra.id}`}>{tipoObra.obra.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${tipoObra.id}`} color="info" size="sm">
