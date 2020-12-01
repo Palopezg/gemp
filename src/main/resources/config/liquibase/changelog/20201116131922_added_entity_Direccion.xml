@@ -15,6 +15,9 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="identification" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="pais" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -74,6 +77,7 @@
                   separator=";"
                   tableName="direccion">
             <column name="id" type="numeric"/>
+            <column name="identification" type="string"/>
             <column name="pais" type="string"/>
             <column name="provincia" type="string"/>
             <column name="partido" type="string"/>

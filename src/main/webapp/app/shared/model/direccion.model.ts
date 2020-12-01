@@ -1,5 +1,6 @@
 export interface IDireccion {
   id?: number;
+  identification?: string;
   pais?: string;
   provincia?: string;
   partido?: string;

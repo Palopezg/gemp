@@ -26,6 +26,10 @@ export const DireccionDetail = (props: IDireccionDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
+            <span id="identification">Identification</span>
+          </dt>
+          <dd>{direccionEntity.identification}</dd>
+          <dt>
             <span id="pais">Pais</span>
           </dt>
           <dd>{direccionEntity.pais}</dd>
