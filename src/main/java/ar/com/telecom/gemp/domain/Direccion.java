@@ -2,6 +2,7 @@ package ar.com.telecom.gemp.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
@@ -18,6 +19,10 @@ public class Direccion implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
+
+    
+    @Column(name = "identification", unique = true)
+    private String identification;
 
     @Column(name = "pais")
     private String pais;
@@ -62,6 +67,19 @@ public class Direccion implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public Direccion identification(String identification) {
+        this.identification = identification;
+        return this;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
     }
 
     public String getPais() {
@@ -242,6 +260,7 @@ public class Direccion implements Serializable {
     public String toString() {
         return "Direccion{" +
             "id=" + getId() +
+            ", identification='" + getIdentification() + "'" +
             ", pais='" + getPais() + "'" +
             ", provincia='" + getProvincia() + "'" +
             ", partido='" + getPartido() + "'" +

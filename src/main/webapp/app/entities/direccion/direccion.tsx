@@ -33,6 +33,7 @@ export const Direccion = (props: IDireccionProps) => {
             <thead>
               <tr>
                 <th>ID</th>
+                <th>Identification</th>
                 <th>Pais</th>
                 <th>Provincia</th>
                 <th>Partido</th>
@@ -56,6 +57,7 @@ export const Direccion = (props: IDireccionProps) => {
                       {direccion.id}
                     </Button>
                   </td>
+                  <td>{direccion.identification}</td>
                   <td>{direccion.pais}</td>
                   <td>{direccion.provincia}</td>
                   <td>{direccion.partido}</td>

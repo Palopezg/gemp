@@ -72,6 +72,7 @@ class DireccionGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
+                , "identification":"SAMPLE_TEXT"
                 , "pais":"SAMPLE_TEXT"
                 , "provincia":"SAMPLE_TEXT"
                 , "partido":"SAMPLE_TEXT"

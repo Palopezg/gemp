@@ -2,6 +2,13 @@
   "name": "Direccion",
   "fields": [
     {
+      "fieldName": "identification",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "unique"
+      ]
+    },
+    {
       "fieldName": "pais",
       "fieldType": "String"
     },
