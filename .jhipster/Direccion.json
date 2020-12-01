@@ -2,6 +2,10 @@
   "name": "Direccion",
   "fields": [
     {
+      "fieldName": "identification",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "pais",
       "fieldType": "String"
     },
