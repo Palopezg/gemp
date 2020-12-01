@@ -29,6 +29,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class DireccionResourceIT {
 
+    private static final String DEFAULT_IDENTIFICATION = "AAAAAAAAAA";
+    private static final String UPDATED_IDENTIFICATION = "BBBBBBBBBB";
+
     private static final String DEFAULT_PAIS = "AAAAAAAAAA";
     private static final String UPDATED_PAIS = "BBBBBBBBBB";
 
@@ -84,6 +87,7 @@ public class DireccionResourceIT {
      */
     public static Direccion createEntity(EntityManager em) {
         Direccion direccion = new Direccion()
+            .identification(DEFAULT_IDENTIFICATION)
             .pais(DEFAULT_PAIS)
             .provincia(DEFAULT_PROVINCIA)
             .partido(DEFAULT_PARTIDO)
@@ -106,6 +110,7 @@ public class DireccionResourceIT {
      */
     public static Direccion createUpdatedEntity(EntityManager em) {
         Direccion direccion = new Direccion()
+            .identification(UPDATED_IDENTIFICATION)
             .pais(UPDATED_PAIS)
             .provincia(UPDATED_PROVINCIA)
             .partido(UPDATED_PARTIDO)
@@ -140,6 +145,7 @@ public class DireccionResourceIT {
         List<Direccion> direccionList = direccionRepository.findAll();
         assertThat(direccionList).hasSize(databaseSizeBeforeCreate + 1);
         Direccion testDireccion = direccionList.get(direccionList.size() - 1);
+        assertThat(testDireccion.getIdentification()).isEqualTo(DEFAULT_IDENTIFICATION);
         assertThat(testDireccion.getPais()).isEqualTo(DEFAULT_PAIS);
         assertThat(testDireccion.getProvincia()).isEqualTo(DEFAULT_PROVINCIA);
         assertThat(testDireccion.getPartido()).isEqualTo(DEFAULT_PARTIDO);
@@ -185,6 +191,7 @@ public class DireccionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(direccion.getId().intValue())))
+            .andExpect(jsonPath("$.[*].identification").value(hasItem(DEFAULT_IDENTIFICATION)))
             .andExpect(jsonPath("$.[*].pais").value(hasItem(DEFAULT_PAIS)))
             .andExpect(jsonPath("$.[*].provincia").value(hasItem(DEFAULT_PROVINCIA)))
             .andExpect(jsonPath("$.[*].partido").value(hasItem(DEFAULT_PARTIDO)))
@@ -210,6 +217,7 @@ public class DireccionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(direccion.getId().intValue()))
+            .andExpect(jsonPath("$.identification").value(DEFAULT_IDENTIFICATION))
             .andExpect(jsonPath("$.pais").value(DEFAULT_PAIS))
             .andExpect(jsonPath("$.provincia").value(DEFAULT_PROVINCIA))
             .andExpect(jsonPath("$.partido").value(DEFAULT_PARTIDO))
@@ -244,6 +252,7 @@ public class DireccionResourceIT {
         // Disconnect from session so that the updates on updatedDireccion are not directly saved in db
         em.detach(updatedDireccion);
         updatedDireccion
+            .identification(UPDATED_IDENTIFICATION)
             .pais(UPDATED_PAIS)
             .provincia(UPDATED_PROVINCIA)
             .partido(UPDATED_PARTIDO)
@@ -266,6 +275,7 @@ public class DireccionResourceIT {
         List<Direccion> direccionList = direccionRepository.findAll();
         assertThat(direccionList).hasSize(databaseSizeBeforeUpdate);
         Direccion testDireccion = direccionList.get(direccionList.size() - 1);
+        assertThat(testDireccion.getIdentification()).isEqualTo(UPDATED_IDENTIFICATION);
         assertThat(testDireccion.getPais()).isEqualTo(UPDATED_PAIS);
         assertThat(testDireccion.getProvincia()).isEqualTo(UPDATED_PROVINCIA);
         assertThat(testDireccion.getPartido()).isEqualTo(UPDATED_PARTIDO);

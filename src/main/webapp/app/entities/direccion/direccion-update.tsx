@@ -72,6 +72,12 @@ export const DireccionUpdate = (props: IDireccionUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
+                <Label id="identificationLabel" for="direccion-identification">
+                  Identification
+                </Label>
+                <AvField id="direccion-identification" type="text" name="identification" validate={{}} />
+              </AvGroup>
+              <AvGroup>
                 <Label id="paisLabel" for="direccion-pais">
                   Pais
                 </Label>

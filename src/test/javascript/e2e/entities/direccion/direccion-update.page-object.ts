@@ -7,6 +7,7 @@ export default class DireccionUpdatePage {
   pageTitle: ElementFinder = element(by.id('gempApp.direccion.home.createOrEditLabel'));
   saveButton: ElementFinder = element(by.id('save-entity'));
   cancelButton: ElementFinder = element(by.id('cancel-save'));
+  identificationInput: ElementFinder = element(by.css('input#direccion-identification'));
   paisInput: ElementFinder = element(by.css('input#direccion-pais'));
   provinciaInput: ElementFinder = element(by.css('input#direccion-provincia'));
   partidoInput: ElementFinder = element(by.css('input#direccion-partido'));
@@ -22,6 +23,14 @@ export default class DireccionUpdatePage {
 
   getPageTitle() {
     return this.pageTitle;
+  }
+
+  async setIdentificationInput(identification) {
+    await this.identificationInput.sendKeys(identification);
+  }
+
+  async getIdentificationInput() {
+    return this.identificationInput.getAttribute('value');
   }
 
   async setPaisInput(pais) {
@@ -133,6 +142,9 @@ export default class DireccionUpdatePage {
   }
 
   async enterData() {
+    await waitUntilDisplayed(this.saveButton);
+    await this.setIdentificationInput('identification');
+    expect(await this.getIdentificationInput()).to.match(/identification/);
     await waitUntilDisplayed(this.saveButton);
     await this.setPaisInput('pais');
     expect(await this.getPaisInput()).to.match(/pais/);
